@@ -1,0 +1,29 @@
+     1                                  ; a program to add three numbers using byte variables
+     2                                  [org 0x0100]
+     3 00000000 31C0                        xor  ax, ax                 ; check effect on ZF 
+     4                                  
+     5 00000002 BB[1F00]                    mov  bx, num1
+     6                                  
+     7 00000005 0307                        add  ax, [bx]
+     8 00000007 81C30200                    add  bx, 2
+     9                                      
+    10 0000000B 0307                        add  ax, [bx]
+    11 0000000D 81C30200                    add  bx, 2
+    12                                  
+    13 00000011 0307                        add  ax, [bx]
+    14 00000013 81C30200                    add  bx, 2
+    15                                  
+    16                                  
+    17 00000017 A3[2500]                    mov  [result], ax
+    18                                      
+    19 0000001A B8004C                      mov  ax, 0x4c00
+    20 0000001D CD21                        int  0x21
+    21                                  
+    22                                  
+    23                                      ; to turn this into an iteration, we need a couple of things: 
+    24                                      ; - branching instruction 
+    25                                      ; - checking constraints -- e.g. c > 0       ; Intel Sotware Developer Manual - Figure 3-8 (Page 80) 
+    26                                  
+    27                                  
+    28 0000001F 05000A000F00            num1: dw  5, 10, 15
+    29 00000025 0000                    result: dw 0 
